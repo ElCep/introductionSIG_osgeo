@@ -106,7 +106,7 @@ Le minimum que l'on demande à un outils de géomatique est de faire des analyse
   \end{itemize}
 
   \subsection{Analyser thématique}
-  \subsubsection{Importer des données non géographique}
+  \subsubsection{Importer des données non géographique}\label{part:chargerData}
   Pour effectuer une jointure de table dans Qgis, il faut dans un premier temps ouvrir la couche vectorielle (nous garderons ici les département de la base geofla de l'IGN qui sous "licence ouverte" version 1.0 ), puis, de la même manière qu'on ouvre une couche vectorielle, on peut ouvrir une table de données (csv, odb, xls) en prenant soint de rendre visible tout les fichiers dans la fenêtre de sélection. Vous avez un fichier CSV, vous pouvez choisir le "Texte Délimité" pour le charger en temps que table. Comme c'est une couche sans géométrie (comprendre de la données textuelle sans lien spataux), il faudra le spécifier dans \texttt{Définition de la géométrie}.
 
   \begin{figure}
@@ -173,13 +173,76 @@ et en la rendant modifiable avec \includegraphics[width=0.5cm]{img/mActionToggle
   \end{figure}
 
 \section{Traitements à partir de rasters}
-  \subsection{Préparation des données}
-  \subsection{Assembler des rasters}
-  \subsection{Reprojeter des rasters}
-  \subsection{Découper le raster en fonction d'un polygone}
-  \subsection{Calcul sur rasters}
+  Qgis est capable de travail sur des images raster grâce à un certain nombre de librairies qui sont embarquées. Nous allons ici effectuer quelques traitements à partir de données altitudinales.
 
-\section{Geocoder des données geographiques}
+  Mettons-nous en situation. Vous travaillez dans un bureau d'études spécialisé dans les études d'impact environnemental. Un client vous a missionné pour implanter une éolienne sur un territoire.
+
+  Vous n'avez pas beaucoup d'argent, vous allez donc essayer de vous débrouiller avec des données libres et gratuites ! La première chose à faire est de télécharger un modèle numérique de terrain (MNT ou DTM digital Terrain Model en anglais). Par chance, la mission SRTM propose gratuitement des données de MNT pour le monde entier avec une résolution de 90 mètres.
+
+  Vous pouvez les télécharger sur le site \url{http://srtm.csi.cgiar.org/} mais je vous ai téléchargé les tuiles pour le Limousin dans le fichier de données (\texttt{srtm\_37\_03} et \texttt{srtm\_37\_04}).
+
+  \subsection{Prépéarer la donnée}
+
+  Vous pouvez ouvrir les tuiles sur Qgis et vous constaterez qu'elles sont en projection WGS84. Or, nous travaillons en France en projection Lambert 93. Vous constatez aussi que le Limousin est à cheval sur deux tuiles (surtout le sud de la Corrèze). Le premier travail va donc consister à assembler les deux raster, les reprojeter en Lambert 93 et les découper en suivant les contours du Limousin.
+
+    \subsubsection{Assembler des raster}
+
+    Vous avez chargé les deux raster dans Qgis (même méthode que dans la section \ref{part:chargerData}). Pour les assembler de manière efficace, sans pour autant prendre de la place sur le disque dur, et faciliter le chargement (que des avantages !), on peut créer un raster virtuel (dans le menu Raster -> Divers -> construire un raster virtuelraster virtuel).
+
+    Après avoir choisi les raster en entré et les méthode d'échantillonage si les raster avait des résolutions différentes vous pouvez enregistrer le raster virtuel dans un fichier ou le garder en cache pour un travail temporaire dans Qgis.
+
+    Astuce : Vous noterez que la construction d'un raster virtuel utilise une fonction de la librairie gdal. Chaque fois que vous renseignez un champ, la partie texte s'allonge et vous permet de voir comment se constitue cette fonction gdalbuildvrt (fig. \ref{fig:buildvr}).
+
+    \subsubsection{Reprojeter des raster}
+
+    Le raster virtuel se comporte comme un raster normal, tandis que si vous allez dans le dossier où vous l'avez créé, vous constaterez que ce n'est qu'un fichier texte qui permet à Qgis d'assembler mécaniquement les deux rasters, et de les considérer comme une seule entité.
+
+    Ce raster est toujours en projection WGS84, et nous voudrions le reprojeter en Lambert 93. Pour cela vous allez utiliser l'outil reprojectionreprojection qui se trouve dans le menu Raster-> Projections -> Projection).
+
+    Vous avez plusieurs rasters ouverts, il faudra choisir dans le menu les rasters à reprojeter, s'il n'y en a qu'un, il sera disponible immédiatement. Vous allez devoir définir la projection en entrée (SRC Source), avec Sélections vous pouvez partir à la recherche de la projection WGS84.
+
+    Vous spécifiez la projection en sortie (SRC sortie) et vous sélectionnez, de la même manière que pour l'entrée, la projection Lambert 93 (EPSG:2154\footnote{EPSG pour \textit{European Petroleum Survey Group}, défini une liste des systèmes de coordonnées géoréférencées et leur a associé des codes pour les identifier. Ces codes sont notamment utilisés dans les standards de l'Open Geospatial Consortium}).
+
+    Si vous avez plusieurs cœurs sur votre ordinateur, et que le raster est pesant, vous pouvez envoyer l'action en multithread et valider
+
+    \begin{figure}
+    \centering
+    \subfigure[]{\includegraphics[width=0.9\textwidth]{img/bd_gdalbuildvr}\label{fig:buildvr}}\\
+    \subfigure[]{\includegraphics[width=0.9\textwidth]{img/bd_decoupeRaster}\label{fig:decoupraster}}
+      \caption{Des symboles proportionnels}\label{fig:analyseThematique}
+    \end{figure}
+
+    \subsubsection{Découper le raster en fonction d’un polygone}
+
+    Vous avez maintenant besoin d'ouvrir la couche polygone du Limousin que je vous ai préparée en plus d'un raster reprojeté. La découpe du raster en fonction d'un polygone se fait dans le menu Raster -> Extraction -> Découper une raster selon une couche de masque) .
+
+    Sélectionner le raster en entrée, le raster en sortie. Vous pouvez ensuite sélectionner la découpe du raster avec une emprise rectangulaire (en fournissant les coordonnées) ou avec une couche de masquage (fig. \ref{fig:decoupraster}).
+
+    Nous allons effectuer la seconde solution (couche de masquage) avec la couche de polygone Limousin. Ensuite validez et vous obtenez en sortie une belle découpe bien projetée (fig. \ref{fig:carte_limousin_decoup})!
+
+    \begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/rasterLimousin}
+      \caption{Raster découper selon un polygone}\label{fig:carte_limousin_decoup}
+    \end{figure}
+
+    \subsubsection{Calcul sur rasters : exemple de co-visibilité}
+
+    Je vous ai préparé également un dossier shapefile qui contient un point pour situer la zone d'implantation éolienne. Vous devez avoir ouvert maintenant dans Qgis le Limousin, et le point nommé héol.shp .
+
+    Il existe plusieurs solutions pour faire des calculs de covisibilité dans Qgis. On peut utiliser GRASS-GIS en tant qu'extension et on peut aussi utiliser GRASS-GIS ou SAGA-GIS dans Sextante (depuis la version 2.0.X). Comme nous travaillons sur la version 2, nous allons utiliser les outils Sextante. Pour les activer, accédez au menu Traitement -> boite à outils, faisant apparaitre une boite à outils sur la droite de l'interface. Vous chercherez la fonction r.los .
+
+    Renseignez ensuite sur quelle couche de MNT l'algorithme va calculer,  la position du champ d'éoliennes, la taille de l'objet (ici nos éoliennes), j'ai choisi 20m, la distance maximum à laquelle on peut voir l'objet (constater une nuisance), enfin la résolution à laquelle va travailler GRASS. Plus cette résolution sera haute plus le résultat sera rapide, mais moins la qualité sera bonne. Ici, j'ai choisi 30.
+
+    Vous pouvez sauvegarder le résultat sous forme d'un raster ou simplement le garder en mémoire tampon.
+
+    Vous n'avez plus qu'à faire tourner l'algorithme... pour produire la figure \ref{fig:carte_limousin_covisibilite}
+
+    \begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/r.viewshed}
+      \caption{Carte de covisibilité}\label{fig:carte_limousin_covisibilite}
+    \end{figure}
 
 
 
