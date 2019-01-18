@@ -230,9 +230,9 @@ et en la rendant modifiable avec \includegraphics[width=0.5cm]{img/mActionToggle
 
     Je vous ai préparé également un dossier shapefile qui contient un point pour situer la zone d'implantation éolienne. Vous devez avoir ouvert maintenant dans Qgis le Limousin, et le point nommé héol.shp .
 
-    Il existe plusieurs solutions pour faire des calculs de covisibilité dans Qgis. On peut utiliser GRASS-GIS en tant qu'extension et on peut aussi utiliser GRASS-GIS ou SAGA-GIS dans Sextante (depuis la version 2.0.X). Comme nous travaillons sur la version 2, nous allons utiliser les outils Sextante. Pour les activer, accédez au menu Traitement -> boite à outils, faisant apparaitre une boite à outils sur la droite de l'interface. Vous chercherez la fonction r.los .
+    Il existe plusieurs solutions pour faire des calculs de covisibilité dans Qgis. On peut utiliser GRASS-GIS en tant qu'extension et on peut aussi utiliser GRASS-GIS ou SAGA-GIS dans Sextante (depuis la version 2.0.X). Comme nous travaillons sur la version 3, nous allons utiliser les outils Sextante. Pour les activer, accédez au menu Traitement -> boite à outils, faisant apparaitre une boite à outils sur la droite de l'interface. Vous chercherez la fonction \texttt{r.viewshed} .
 
-    Renseignez ensuite sur quelle couche de MNT l'algorithme va calculer,  la position du champ d'éoliennes, la taille de l'objet (ici nos éoliennes), j'ai choisi 20m, la distance maximum à laquelle on peut voir l'objet (constater une nuisance), enfin la résolution à laquelle va travailler GRASS. Plus cette résolution sera haute plus le résultat sera rapide, mais moins la qualité sera bonne. Ici, j'ai choisi 30.
+    Renseignez ensuite sur quelle couche de MNT l'algorithme va calculer,  la position du champ d'éoliennes, la taille de l'objet (ici nos éoliennes), j'ai choisi 20m, la distance maximum à laquelle on peut voir l'objet (constater une nuisance), enfin la résolution à laquelle va travailler GRASS.
 
     Vous pouvez sauvegarder le résultat sous forme d'un raster ou simplement le garder en mémoire tampon.
 
@@ -240,7 +240,7 @@ et en la rendant modifiable avec \includegraphics[width=0.5cm]{img/mActionToggle
 
     \begin{figure}
     \centering
-    \includegraphics[width=0.9\textwidth]{img/r.viewshed}
+    \includegraphics[width=0.9\textwidth]{img/rViewshed}
       \caption{Carte de covisibilité}\label{fig:carte_limousin_covisibilite}
     \end{figure}
 
