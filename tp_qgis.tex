@@ -6,7 +6,7 @@
 \usepackage{authblk}
 \usepackage{hyperref}
 \usepackage{subfigure}
-\title{Une (trop) rapide introduction a Qgis}
+\title{Une (trop) rapide introduction à Qgis}
 \author[123]{Etienne Delay}
 \affil[1]{1 CIRAD UPR GREEN, F-34398 Montpellier, France}
 \affil[2]{GREEN, CIRAD, Univ. Montpellier, Montpellier France}
@@ -17,47 +17,47 @@
 \maketitle
 Ce document est disponible sur github\footnote{Lien vers les sources du document : \url{https://github.com/ElCep/introductionSIG_osgeo}, consulté le 14 janvier 2019}
 \section{Installation de Qgis}
-  Qgis est devenu ces dernières années l'outil libre (sous licence GNU-GPL) le plus polyvalent en cartographie interfacer avec par exemple GRASS-GIS et SAGA-GIS qui sont des librairies de calcul très puissantes sur des rasters, ou encore la possibilité de se connecter à des bases de données relationnelles (postgreSQL-postgis, oracle, ...).
+  Qgis est devenu ces dernières années l'outil libre (sous licence GNU-GPL) le plus polyvalent en cartographie, interfacé avec par exemple GRASS-GIS et SAGA-GIS qui sont des librairies de calcul très puissantes sur des rasters, ou encore la possibilité de se connecter à des bases de données relationnelles (postgreSQL-postgis, oracle, ...).
 
-  La grande nouveauté est également dans le portage de Qgis vers une solution serveur (ce qui veut dire que vous pourrez facilement créer des cartes dynamiques en ligne, pour peu que vous ayez un serveur), le développement d'une solution légère de consultation (qgis browser), et d'une version androïd !
+  La grande nouveauté est également dans le portage de Qgis vers une solution serveur (ce qui veut dire que vous pourrez facilement créer des cartes dynamiques en ligne, pour peu que vous ayez un serveur), le développement d'une solution légère de consultation (qgis browser), et d'une version androïd (pour tablettes et mobiles) !
 
   Pour travailler, vous commencerez donc par installer Qgis sur votre machine. Le type d'installation va dépendre du système d'exploitation que vous avez sur votre machine.
 
   Pour Linux c'est le plus facile (distributions Fedora, Ubuntu, debian, openSuse, Rhel, CebtOS, Scientific Linux, Mandriva, Archlinux), des packages sont disponibles dans vos dépôts et vous pouvez suivre les instructions.
 
-  Pour Mac, KyngChaos (un gentil contributeur) à longtemps fournis les sources compiler, mais aujourd'hui pour la version OS 10.11 (El Capitain et plus récent) vous pouvez télécharger un fichier.dmg directement sur le site de QGis en suivant scrupuleusement les informations contenues dans le Read Me sur le disque image.
+  Pour Mac, KyngChaos (un gentil contributeur) a longtemps fourni les sources compilées, mais aujourd'hui pour la version OS 10.11 (El Capitain et plus récent) vous pouvez télécharger un fichier.dmg directement sur le site de QGis en suivant scrupuleusement les informations contenues dans le fichier "Read Me" sur le disque image.
 
-  Pour Windows, vous devez choisir l'architecture de votre processeur (32 bit ou 64 bit), mais pas de crainte, si vous ne téléchargez pas le bon, il ne s'installera pas. Je vous conseille plus que vivement d'utiliser l'installateur OSGeo4W (OSgeo for Windows) qui va vous permettre d'installer davantage de dépenses. Cependant, dans certaines situations, vous ne pourrez installer Qgis qu'avec l'installateur indépendant... donc il faudra expérimenter!
+  Pour Windows, vous devez choisir l'architecture de votre processeur (32 bit ou 64 bit), mais pas de crainte, si vous ne téléchargez pas le bon, il ne s'installera pas. Je vous conseille plus que vivement d'utiliser l'installateur OSGeo4W (OSgeo for Windows) qui va vous permettre d'installer davantage de dépendances. Cependant, dans certaines situations, vous ne pourrez installer Qgis qu'avec l'installateur indépendant... donc il faudra expérimenter!
 
 \section{Premiers contacts}
-  \subsection{Qgis un logiciel incuber par l'OSGeo}
+  \subsection{Qgis un logiciel incubé par l'OSGeo}
 
-  \subsection{Quoi de neuf dans Qgis3}
-  QGis 3\footnote{La présentation de Jean-Marie Arsac aux rencontres QGIS 2017 a servi de base à cette section. Vous pouvez retrouver la présentation sur github : \url{https://github.com/OSGeo-fr/QGIS-user-fr/blob/master/2017/presentations/01_matin/01_Azimuth_nouveautes_QGIS_3.pdf}, consulté le 15 janvier 2018} est une réécriture complète du logiciel passant ainsi de Pyhton2\footnote{Qgis utilisait notement Python 2.7.5-2 qui n'avait pas évolué depuis 2010} à Python3 et de Qt4\footnote{Qt4 était problématique sur MacOS et les dériver de Debian, tendis que Qt5 est bien mieux supporté et tire parti des écrans rétina, et support la mobilité} à Qt5. Cette rupture était nécessaire, car ces deux librairies étaient vieillissantes et menacées de ne plus être maintenues sur un grand nombre de systèmes.
+  \subsection{Quoi de neuf dans Qgis3 ?}
+  QGis 3\footnote{La présentation de Jean-Marie Arsac aux rencontres QGIS 2017 a servi de base à cette section. Vous pouvez retrouver la présentation sur github : \url{https://github.com/OSGeo-fr/QGIS-user-fr/blob/master/2017/presentations/01_matin/01_Azimuth_nouveautes_QGIS_3.pdf}, consulté le 15 janvier 2018} est une réécriture complète du logiciel passant ainsi de Pyhton2\footnote{Qgis utilisait notement Python 2.7.5-2 qui n'avait pas évolué depuis 2010} à Python3 et de Qt4\footnote{Qt4 était problématique sur MacOS et les dérivés de Debian, tandis que Qt5 est bien mieux supporté et tire partie des écrans rétina, et supporte la mobilité} à Qt5. Cette rupture était nécessaire, car ces deux librairies étaient vieillissantes et menacées de ne plus être maintenues sur un grand nombre de systèmes.
 
-  Aujourd’hui, dans la version LTR\footnote{Vous pouvez jeter un coup d'oeil sur la Road Map du projet QGIS : \url{https://www.qgis.org/en/site/getinvolved/development/roadmap.html} consulté le 15 janvier.} (\textit{long-term release}) est la version 3.4 si un grand nombre d'extensions ont été portées dans la nouvelle API, la majorité est restée bloquer en 2.X.
+  Aujourd’hui, dans la version LTR\footnote{Vous pouvez jeter un coup d'oeil sur la Road Map du projet QGIS : \url{https://www.qgis.org/en/site/getinvolved/development/roadmap.html} consulté le 15 janvier.} (\textit{long-term release}) est la version 3.4. Si un grand nombre d'extensions ont été portées dans la nouvelle API, la majorité est restée bloquée en 2.X.
 
-  Mais remettre à plat le code en passant à Python3 voulait dire remettre aussi à plat l'API (\textit{application programming interface}) et potentiellement casser toutes les extensions. Or Qgis avec les années est devenu LA porte d'entrée sur une constellation d'outils de traitement de données géospatiales donc le danger de rompre la communauté était grand.
+  Mais remettre à plat le code en passant à Python3 voulait dire remettre aussi à plat l'API (\textit{application programming interface}) et potentiellement casser toutes les extensions. Or, Qgis avec les années est devenu LA porte d'entrée sur une constellation d'outils de traitement de données géospatiales, donc le danger de rompre la communauté était grand.
 
-  On notera des nouveautés dans l'interface (fig. \ref{fig:qgis3-interfaces}), mais également dans le coeur du logiciel, refactoring du C\#, un éditeur de \textit{Dublin core}, l'intégration de GeoNode. Le composeur d'impression a été ré écrit pour mieux gérer la mise en page (nouveaux symbole, nouveaux algorithmes de coloriage, de non-chevauchement).
+  On notera des nouveautés dans l'interface (fig. \ref{fig:qgis3-interfaces}), mais également dans le coeur du logiciel, refactoring du C\#, un éditeur de \textit{Dublin core}, l'intégration de GeoNode. Le composeur d'impression a été réécrit pour mieux gérer la mise en page (nouveaux symboles, nouveaux algorithmes de coloriage, de non-chevauchement).
 
-  Pour l'interface avec les bases de données, postgreSQL et SQLite sont très bien supporté (avec des request de mise-a-jour régulières). Enfin je voulais attirer votre attention sur un nouveau format par défaut baptisé GPKG qui vise à s'extraire du format \textit{legacy} ESRI qu'est le \textit{shapefile}.
+  Pour l'interface avec les bases de données, postgreSQL et SQLite sont très bien supportés (avec des request de mise-à-jour régulières). Enfin, je voulais attirer votre attention sur un nouveau format par défaut baptisé GPKG qui vise à s'extraire du format \textit{legacy} ESRI qu'est le \textit{shapefile}.
   \begin{figure} %%%script issu de script/map_surfaces_viticole_mondiale.R
   \centering
     \subfigure[]{\includegraphics[width=0.45\textwidth]{img/interface_qgis1}\label{fig:qgis31}}
     \subfigure[]{\includegraphics[width=0.45\textwidth]{img/interface_qgis2}\label{fig:qgis32}}\\
     \subfigure[]{\includegraphics[width=0.9\textwidth]{img/interface_qgis3}\label{fig:qgis33}}
     \subfigure[]{\includegraphics[width=0.9\textwidth]{img/interface_qgis4}\label{fig:qgis34}}
-    \caption{Quelques capuces de l'interface de QGIS3. Sur la figure \subref{fig:qgis31} on constate l'ajout d'une barre de recherche dans les propriétés de la couche, en
+    \caption{Quelques captures de l'interface de QGIS3. Sur la figure \subref{fig:qgis31} on constate l'ajout d'une barre de recherche dans les propriétés de la couche, en
      \subref{fig:qgis32} la possibilité d'exporter la carte rapidement sans passer par le composeur d'impression, \subref{fig:qgis33} Le support du multi-point-de-vue et
      \subref{fig:qgis34} le support de la 3D}
     \label{fig:qgis3-interfaces}
   \end{figure}
 
-  \subsection{Quelles données sont lisibles?}
+  \subsection{Quelles données sont lisibles ?}
   Vous pouvez afficher et superposer des couches de données rasters et vecteurs dans différents formats et projections sans avoir à faire de conversion dans un format commun. Les formats supportés incluent :
   \begin{itemize}
-    \item les tables spatiales et les vues PostGIS,SpatiaLite, MSSQL Spatial et Oracle Spatial, les formats vecteurs supportés par la bibliothèque OGR installée, ce qui inclut les Shapefiles ESRI , MapInfo, SDTS, GML et beaucoup d’autres, voir section les données vectorielles.
+    \item les tables spatiales et les vues PostGIS, SpatiaLite, MSSQL Spatial et Oracle Spatial, les formats vecteurs supportés par la bibliothèque OGR installée, ce qui inclut les Shapefiles ESRI , MapInfo, SDTS, GML et beaucoup d’autres, voir section les données vectorielles.
     \item les formats raster supportés par la bibliothèque GDAL (Geospatial Data Abstraction Library) tels que GeoTiff, Erdas img., ArcInfo ascii grid, JPEG, PNG et beaucoup d’autres, voir section Les données raster.
     \item les outils de Traitements QGIS pour lancer, depuis QGIS, des centaines d’algorithmes natifs ou provenant d’applications tierces, voir section Introduction du chapitre sur les Outils de traitements.
     \item les formats raster et vecteurs provenant des bases de données GRASS.
@@ -68,10 +68,10 @@ Ce document est disponible sur github\footnote{Lien vers les sources du document
 
   \begin{itemize}
     \item Cliquez sur l’icône gestionnaire des sources open-data (CTRL+L) \includegraphics[width=1.5cm]{img/qgis_gestionnaire_de_sources}.
-    \item La boite de dialogue s'ouvre (fig \ref{fig:boiteDialogueSource}) et vous permet de choisir le type de données à ouvrir. Pour les données vecteur et raster  "Fichier" devrait être sélectionnés comme Type de source dans la fenêtre. Vous pouvez inscrire le chemin dans le menu ou utiliser le bouton \texttt{...} pour parcourir l'arborescence.
-    \item Parcourez le dossier où vous avez téléchargé les données du cour, sélectionnez le fichier "departement\_geofla" et cliquez sur [Ouvrir], et enfin, dans la boîte de dialogue Ajouter une couche vecteur, cliquez sur [OK].
+    \item La boite de dialogue s'ouvre (fig \ref{fig:boiteDialogueSource}) et vous permet de choisir le type de données à ouvrir. Pour les données vecteur et raster  "Fichier" devrait être sélectionné comme Type de source dans la fenêtre. Vous pouvez inscrire le chemin dans le menu ou utiliser le bouton \texttt{...} pour parcourir l'arborescence.
+    \item Parcourez le dossier où vous avez téléchargé les données du cours, sélectionnez le fichier "departement\_geofla" et cliquez sur [Ouvrir], et enfin, dans la boîte de dialogue Ajouter une couche vecteur, cliquez sur [OK].
     \item Zoomez sur une zone de votre choix (molette de la souris ou outils de zoom).
-    \item Double-cliquez sur la couche \texttt{departement\_geofla} dans la liste des couches pour ouvrir la fenêtre; ou click droit et Propriété des couches (fig. \ref{fig:boiteDialoguePropriete}).
+    \item Double-cliquez sur la couche \texttt{departement\_geofla} dans la liste des couches pour ouvrir la fenêtre; ou clique-droit et Propriété des couches (fig. \ref{fig:boiteDialoguePropriete}).
     \item Cliquez sur l’onglet Style et sélectionnez le bleu comme couleur de remplissage.
     \item Cliquez sur l’onglet Étiquettes et sélectionnez \texttt{étiquettes simples}(fig. \ref{fig:boiteDialogueEtiquette}) pour permettre l’étiquetage des entités. Choisissez le champ intitulé NOM\_DEP comme champ d’étiquetage.
     \item Pour améliorer la lisibilité des étiquettes, vous pouvez ajouter un halo autour d’elles, en cliquant sur “Tampon” dans la liste à gauche puis sur checkbox Affiche un tampon. Choisissez 3 comme taille du tampon.
@@ -84,7 +84,7 @@ Ce document est disponible sur github\footnote{Lien vers les sources du document
     \subfigure[]{\includegraphics[width=0.45\textwidth]{img/bd_proprieteCOuche}\label{fig:boiteDialoguePropriete}}\\
     \subfigure[]{\includegraphics[width=0.45\textwidth]{img/bd_remplissage}\label{fig:boiteDialogueRemplissage}}
     \subfigure[]{\includegraphics[width=0.45\textwidth]{img/bd_etiquette}\label{fig:boiteDialogueEtiquette}}
-    \caption{Les boites de dialogues. \subref{fig:boiteDialogueSource} pour ajouter une couche, pour modifier les propriétés de la couche \subref{fig:boiteDialoguePropriete}, \subref{fig:boiteDialogueRemplissage}, et les étiquette \subref{fig:boiteDialogueEtiquette}}
+    \caption{Les boites de dialogue. \subref{fig:boiteDialogueSource} pour ajouter une couche, pour modifier les propriétés de la couche \subref{fig:boiteDialoguePropriete}, \subref{fig:boiteDialogueRemplissage}, et les étiquettes \subref{fig:boiteDialogueEtiquette}}
     \label{fig:qgis3-dialogues1}
   \end{figure}
 
@@ -115,13 +115,13 @@ Le minimum que l'on demande à un outil de géomatique est de faire des analyses
     \subfigure[]{\includegraphics[width=0.8\textwidth]{img/prop_table}\label{fig:boiteDialogueProprieteTable}}\\
     \subfigure[]{\includegraphics[width=0.6\textwidth]{img/convertion_int}\label{fig:converttion_int}}
     \subfigure[]{\includegraphics[width=0.4\textwidth]{img/bd_jointure}\label{fig:boiteDialoguejointure}}
-    \caption{Les boites de dialogues. \subref{fig:boiteDialogueSource} pour ajouter une couche, pour modifier les propriétés de la couche \subref{fig:boiteDialoguePropriete}, \subref{fig:boiteDialogueRemplissage}, et les étiquette \subref{fig:boiteDialogueEtiquette}}
+    \caption{Les boites de dialogue. \subref{fig:boiteDialogueSource} pour ajouter une couche, pour modifier les propriétés de la couche \subref{fig:boiteDialoguePropriete}, \subref{fig:boiteDialogueRemplissage}, et les étiquettes \subref{fig:boiteDialogueEtiquette}}
     \label{fig:qgis3-dialogues1}
   \end{figure}
 
   Les deux documents apparaissent en temps que couche dans l'interface prévue à cet effet (fig. \ref{fig:interfaceCouches}). Il faut maintenant vérifier que vous avez deux tables qui seront assemblables (fig. \ref{fig:boiteDialogueProprieteTable}). Pour cela, outre le fait d'avoir une colonne similaire (ce qui est le minimum quand on cherche à joindre deux tables), il faut vérifier que le champ à assembler est bien de la même nature (on cherchera à avoir des caractères avec des caractères, des entiers avec des entiers, des numériques avec des numériques...). On accède à cette donnée dans les propriétés de la couche (fig. \ref{fig:qgis3-dialogues1}).
 
-  On a accès à la nature de la couche en double-cliquant sur celle-ci (ou en effectuant un clic droit et sélectionnant "propriété de la couche"), et en se rendant dans le menu "champs". Pour la couche \texttt{bio2008} on voit donc que tous les champs sont considérés comme des entiers.
+  On a accès à la nature de la couche en double-cliquant sur celle-ci (ou en effectuant un clic-droit et sélectionnant "propriété de la couche"), et en se rendant dans le menu "champs". Pour la couche \texttt{bio2008} on voit donc que tous les champs sont considérés comme des entiers.
   La même vérification pour la couche "département\_geofla" nous montre que la colonne sur laquelle on veut effectuer la jointure est une chaîne de caractères (string). Il faut donc la convertir pour plus de sécurité. C'est ce que nous ferons dans la section suivante.
 
   \subsubsection{modifier/mettre à jour un champ de la table attributaire}
@@ -135,17 +135,17 @@ et en la rendant modifiable avec \includegraphics[width=0.5cm]{img/mActionToggle
 
   Vous pouvez ensuite valider avec OK et revenir à l'interface de la carte.
 
-  Vous noterez qu'il y a une erreur due à la présence des 2 départements de Corse qui sont A1 et A2. Vous devez supprimer la Corse de la carte (nous n'en aurons pas besoin), ou modifier les code\_dep et les transformer en chiffre (par exemple 999).
+  Vous noterez qu'il y a une erreur due à la présence des deux départements de Corse qui sont A1 et A2. Vous devez supprimer la Corse de la carte (nous n'en aurons pas besoin), ou modifier les code\_dep et les transformer en chiffre (par exemple 999).
 
   Pour supprimer la Corse, il faut :
 
-  Rester en mode édition de la carte \includegraphics[width=0.5cm]{img/mActionOpenTable}  sélectionner les deux départements en avec l’outil  sélection \includegraphics[width=0.5cm]{img/mActionSelectRectangle}, en maintenant la touche "Shift" enfoncée, puis en cliquant sur les deux départements de Corse. Ils deviennent alors jaunes. Vous pouvez les supprimer avec \includegraphics[width=0.5cm]{img/mActionDeleteSelected}. Vous pouvez recommencer l'étape précédente :-) .
+  Rester en mode édition de la carte \includegraphics[width=0.5cm]{img/mActionOpenTable}  sélectionner les deux départements avec l’outil sélection \includegraphics[width=0.5cm]{img/mActionSelectRectangle}, en maintenant la touche "Shift" enfoncée, puis en cliquant sur les deux départements de Corse. Ils deviennent alors jaunes. Vous pouvez les supprimer avec \includegraphics[width=0.5cm]{img/mActionDeleteSelected}. Vous pouvez recommencer l'étape précédente :-) .
 
   Il faut maintenant enregistrer votre travail. Vous pouvez soit sauvegarder les modifications sur la couche departement\_geofla, soit faire une sauvegarde sous un autre nom et ainsi conserver la couche initiale propre.
 
   L'enregistrement de la couche s'effectue en faisant un clic droit sur la couche et en sélectionnant sauvegarder.
 
-  \subsubsection{La jointure en elle même}
+  \subsubsection{La jointure en elle-même}
 
   Pour faire une jointure, vous allez dans les propriétés de la couche spatiale dans laquelle vous voulez importer des données, et dans le menu jointure, vous cliquez sur le "+" en bas de la fenêtre. Vous pouvez alors renseigner les couches à joindre et les champs sur lesquels faire la jointure. Dans cet exemple, vous joignez la couche "bio2008" sur le champ "id\_departement" avec le champ que vous avez créé à l'étape (fig. \ref{fig:boiteDialoguejointure}).
 
@@ -154,14 +154,14 @@ et en la rendant modifiable avec \includegraphics[width=0.5cm]{img/mActionToggle
 
   Mais comme nous sommes sur des valeurs absolues, et que Bertin est un type bien, il faudrait utiliser des symboles proportionnels à la valeur quantitative absolue.
 
-  Pour ça, il faut aller dans les propriétés de la couche, puis dans "Style". Là on peut ajouter un symbole avec le "+" en bas de la fenêtre et choisir remplissage de centroïde. Cela fait apparaitre des points rouges dans la partie couche de symbole. Vous sélectionnez "Marker", symbole simple.
+  Pour ça, il faut aller dans les propriétés de la couche, puis dans "Style". Là, on peut ajouter un symbole avec le "+" en bas de la fenêtre et choisir remplissage de centroïde. Cela fait apparaitre des points rouges dans la partie couche de symbole. Vous sélectionnez "Marker", symbole simple.
 
   Là, vous voulez définir une taille proportionnelle. Pour cela vous allez cocher la box en face de "Taille" et modifier le menu en cliquant sur les "..." . Cela va permettre de rentrer une fonction pour les tailles proportionnelles. Vous pouvez alors directement effectuer des opérations sur le champ.
 
   Vous allez transformer la valeur du champ \texttt{bio2008\_Producteurs} en entier (par sécurité) avec l'expression \texttt{to\_int("bio2008\_Producteurs")}
   puis Ok pour valider (fig \ref{fig:symbolesProp}).
 
-  Astuce : il peut y avoir quelques conflits entre les polygones des départements et les cercles proportionnels. Afin d'éviter cela vous pouvez rendre transparent le remplissage des polygones de cette couche et ouvrir une nouvelle couche des départements en dessous.
+  Astuce : il peut y avoir quelques conflits entre les polygones des départements et les cercles proportionnels. Afin d'éviter cela vous pouvez rendre transparent le remplissage des polygones de cette couche et ouvrir une nouvelle couche des départements en-dessous.
 
   et voilà le résultat (fig.\ref{fig:carte_symbole})!
 
@@ -173,7 +173,7 @@ et en la rendant modifiable avec \includegraphics[width=0.5cm]{img/mActionToggle
   \end{figure}
 
 \section{Traitements à partir de rasters}
-  Qgis est capable de travail sur des images raster grâce à un certain nombre de librairies qui sont embarquées. Nous allons ici effectuer quelques traitements à partir de données altitudinales.
+  Qgis est capable de traiter des images raster grâce à un certain nombre de librairies qui sont embarquées. Nous allons ici effectuer quelques traitements à partir de données altitudinales.
 
   Mettons-nous en situation. Vous travaillez dans un bureau d'études spécialisé dans les études d'impact environnemental. Un client vous a missionné pour implanter une éolienne sur un territoire.
 
@@ -207,8 +207,8 @@ et en la rendant modifiable avec \includegraphics[width=0.5cm]{img/mActionToggle
 
     \begin{figure}
     \centering
-    \subfigure[]{\includegraphics[width=0.9\textwidth]{img/bd_gdalbuildvr}\label{fig:buildvr}}\\
-    \subfigure[]{\includegraphics[width=0.9\textwidth]{img/bd_decoupeRaster}\label{fig:decoupraster}}
+    \subfigure[]{\includegraphics[width=0.49\textwidth]{img/bd_gdalbuildvr}\label{fig:buildvr}}\\
+    \subfigure[]{\includegraphics[width=0.49\textwidth]{img/bd_decoupeRaster}\label{fig:decoupraster}}
       \caption{Des symboles proportionnels}\label{fig:analyseThematique}
     \end{figure}
 
@@ -223,14 +223,14 @@ et en la rendant modifiable avec \includegraphics[width=0.5cm]{img/mActionToggle
     \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{img/rasterLimousin}
-      \caption{Raster découper selon un polygone}\label{fig:carte_limousin_decoup}
+      \caption{Raster découpé selon un polygone}\label{fig:carte_limousin_decoup}
     \end{figure}
 
     \subsubsection{Calcul sur rasters : exemple de co-visibilité}
 
     Je vous ai préparé également un dossier shapefile qui contient un point pour situer la zone d'implantation éolienne. Vous devez avoir ouvert maintenant dans Qgis le Limousin, et le point nommé héol.shp .
 
-    Il existe plusieurs solutions pour faire des calculs de covisibilité dans Qgis. On peut utiliser GRASS-GIS en tant qu'extension et on peut aussi utiliser GRASS-GIS ou SAGA-GIS dans Sextante (depuis la version 2.0.X). Comme nous travaillons sur la version 3, nous allons utiliser les outils Sextante. Pour les activer, accédez au menu Traitement -> boite à outils, faisant apparaitre une boite à outils sur la droite de l'interface. Vous chercherez la fonction \texttt{r.viewshed} .
+    Il existe plusieurs solutions pour faire des calculs de co-visibilité dans Qgis. On peut utiliser GRASS-GIS en tant qu'extension et on peut aussi utiliser GRASS-GIS ou SAGA-GIS dans Sextante (depuis la version 2.0.X). Comme nous travaillons sur la version 3, nous allons utiliser les outils Sextante. Pour les activer, accédez au menu Traitement -> boite à outils, faisant apparaitre une boite à outils sur la droite de l'interface. Vous chercherez la fonction \texttt{r.viewshed} .
 
     Renseignez ensuite sur quelle couche de MNT l'algorithme va calculer,  la position du champ d'éoliennes, la taille de l'objet (ici nos éoliennes), j'ai choisi 20m, la distance maximum à laquelle on peut voir l'objet (constater une nuisance), enfin la résolution à laquelle va travailler GRASS.
 
@@ -241,7 +241,7 @@ et en la rendant modifiable avec \includegraphics[width=0.5cm]{img/mActionToggle
     \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{img/rViewshed}
-      \caption{Carte de covisibilité}\label{fig:carte_limousin_covisibilite}
+      \caption{Carte de co-visibilité}\label{fig:carte_limousin_covisibilite}
     \end{figure}
 
     Attention ce calcul ne tient compte que du relief. Si nous voulions tenir compte de la forêt (ce qui serait intéressant), il aurait fallu découper les zones boisées à partir d'Openstreetmap ou de données Corine land cover, les transformer en raster et ajouter 4 à 5 mètres au MNT à toutes les zones boisées...
