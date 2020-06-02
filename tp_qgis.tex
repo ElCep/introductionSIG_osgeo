@@ -16,6 +16,17 @@
 
 \maketitle
 Ce document est disponible sur github\footnote{Lien vers les sources du document : \url{https://github.com/ElCep/introductionSIG_osgeo}, consulté le 14 janvier 2019}
+
+\section{Qgis un logiciel OSGeo}
+Vous trouverez toutes les informations sur le site de la fondation, du chapitre Français, et sur le wiki\footnote{un lien pour le wiki : \url{https://wiki.osgeo.org}}. Les notes de cette sections sont issu du wiki francophone\footnote{un lien pour le wiki francophone : \url{https://wiki.osgeo.org/wiki/Category:Local\_chapter\_francophone}}.
+
+  \subsection{L'OSGeo fondation}
+  La Fondation Geospatiale Open Source, ou OSGeo, est une organisation loi 1901 (mais de type américaine) dont la mission est d'aider et de promouvoir le développement collaboratif des données et des technologies géospatiales ouvertes. La Fondation fournit une aide financière, organisationnelle et légale à la communauté géospatiale libre la plus large. Elle sert également d'entité légale indépendante envers qui les membres de la communauté peuvent contribuer au code, aux finances et aux autres ressources, s'assurer que leurs contributions seront maintenues au bénéfice du public. OSGeo sert également d'organisation, d'assistance et de défense pour la communauté géospatiale libre, et fournit un forum commun et une infrastructure partagée pour améliorer la collaboration entre projets.
+
+  Bien que l'OSGeo ait eu 10 ans en 2016, c'est encore une organisation en cours de définition. Bien que les membres initiaux et le Conseil d'Administration (Board of Directors) aient été formés, le modèle de gouvernance de la Fondation suit un processus de discussion et d'amélioration. La participation dans ce processus est ouverte à toute la communauté open-source.  OSGeo a pour objet final d'aider tout projets liés aux cartes numériques et aux données et analyses spatiales. Un Comité de Gouvernance de Projet (Project Steering Committee PSC), avisé par le Conseil d'Administration (Board of Directors) de l'OSGeo, est à la tête de chaque projet. Tous les travaux de la Fondation sont conduits sur des forums publics parmi une communauté libre de participants.
+
+  Qgis, comme une bonne partie des outils de manipulation de données spatiales\footnote{On retiendra par exemple : postGIS, geoserver, mapserver, openlayers, GRASS-GIS, etc. La page des incubations : \url{https://wiki.osgeo.org/wiki/Incubation_Committee}} a été incubé par l'OSGeo. Qgis a commencé son incubation à l'OSgeo en mars 2007 et a été validé en mars 2008.
+
 \section{Installation de Qgis}
   Qgis est devenu ces dernières années l'outil libre (sous licence GNU-GPL) le plus polyvalent en cartographie, interfacé avec par exemple GRASS-GIS et SAGA-GIS qui sont des librairies de calcul très puissantes sur des rasters, ou encore la possibilité de se connecter à des bases de données relationnelles (postgreSQL-postgis, oracle, ...).
 
@@ -179,7 +190,18 @@ et en la rendant modifiable avec \includegraphics[width=0.5cm]{img/mActionToggle
 
   Vous n'avez pas beaucoup d'argent, vous allez donc essayer de vous débrouiller avec des données libres et gratuites ! La première chose à faire est de télécharger un modèle numérique de terrain (MNT ou DTM digital Terrain Model en anglais). Par chance, la mission SRTM propose gratuitement des données de MNT pour le monde entier avec une résolution de 90 mètres.
 
-  Vous pouvez les télécharger sur le site \url{http://srtm.csi.cgiar.org/,} mais je vous ai téléchargé les tuiles pour le Limousin dans le fichier de données (\texttt{srtm\_37\_03} et \texttt{srtm\_37\_04}).
+  \subsection{Télécharger des données SRTM}
+  Vous pouvez télécharger les données SRTM grâce à au plug-in SRTm-dowloader de QGis. Pour cela, il vous faudra au préalable avoir créé un compte sur le service en ligne de la NASA\footnote{Vous pouvez le faire ici : \url{https://urs.earthdata.nasa.gov//users/new}, consulté le 2 juin 2020}. Une fois que vous avez un compte, la manière la plus simple est de charger une couche vectorielle dans Qgis, de mettre le canevas à jour (`Zoomer sur la couche`) et ouvrir le plug-in (c.f. fig \ref{fig:srtmDownloader}).
+
+  Vous pouvez alors demander au plug-in de définir l'étendue de la zone de téléchargement au canevas de ma zone de visualisation de QGis avec le bouton `Set Caneva extend`. On vous demandera alors de rentrer vos identifiants `earthdata.nasa.gov` et le téléchargement commencera.
+
+  \begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{img/srtm_downloader.png}
+  \caption{Usage du plug-in SRTM-Downloader}\label{fig:srtmDownloader}
+  \end{figure}
+
+  Par défaut les tuiles téléchargées seront stockées dans des fichiers temporaires. Vous pouvez les sauvegarder sur votre disque dur pour pouvoir les réutiliser plus tard sans avoir à les télécharger (attention, par défaut la projection est WGS84, vous devriez spécifier Lambert93).
 
   \subsection{Prépéarer la donnée}
 
